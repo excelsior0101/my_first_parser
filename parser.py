@@ -16,7 +16,7 @@ def fetch_onliner_catalog(url, params=None):
         return None
     
 
-url = 'https://catalog.onliner.by/mobile/apple'
+url = 'https://catalog.onliner.by/mobile'
 
 soup = fetch_onliner_catalog(url=url)
 
