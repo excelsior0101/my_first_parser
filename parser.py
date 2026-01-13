@@ -1,28 +1,24 @@
 import requests
-import json
+from bs4 import BeautifulSoup
 
 def fetch_onliner_catalog(url, params=None):
     headers = {
-        'User-agent': 'Chrome/120.0.0.0',
+        'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
         'Accept': 'application/json'
     }
     
     try:
-        response = requests.get(url, headers=headers, params=params)
+        response = requests.get(url, headers=headers, timeout=10 )
         response.raise_for_status()
-        data = response.json()
-        print(data)
-        return data
+        soup = BeautifulSoup(response.text, 'html.parser')
+        return soup
     except requests.exceptions.RequestException as exc:
         print(f'Ошибка при запросе к API: {exc}')
         return None
     
 
-api_url = 'https://counter.mediameter.by/?href=https%3A%2F%2Fcatalog.onliner.by%2Fmobile%2Fapple'
-search_params = {
-    'query': 'смартфон'
-}
+url = 'https://catalog.onliner.by/mobile/apple'
 
-data = fetch_onliner_catalog(url=api_url, params=search_params)
-if data:
-    print(json.dumps(data, indent=2, ensure_ascii=False))
+soup = fetch_onliner_catalog(url=url)
+
+
