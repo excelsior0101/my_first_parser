@@ -21,6 +21,12 @@ url = 'https://catalog.onliner.by/mobile'
 soup = fetch_onliner_catalog(url=url)
 
 names = soup.find_all('h3', class_='catalog-form__description catalog-form__description_primary catalog-form__description_base-additional catalog-form__description_font-weight_semibold catalog-form__description_condensed-other')
+links = soup.find_all('a', href=True, class_='catalog-form__link catalog-form__link_primary-additional catalog-form__link_base-additional catalog-form__link_font-weight_semibold catalog-form__link_nodecor')
 print(f'Всего спарсилось {len(names)} названий телефонов')
+print(f'Всего спарсилось {len(links)} ссылок')
 for name in names:
     print(name.text)
+    
+for link in links:
+    print(link['href'])
+    
