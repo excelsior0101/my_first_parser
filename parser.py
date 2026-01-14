@@ -20,4 +20,7 @@ url = 'https://catalog.onliner.by/mobile'
 
 soup = fetch_onliner_catalog(url=url)
 
-
+names = soup.find_all('h3', class_='catalog-form__description catalog-form__description_primary catalog-form__description_base-additional catalog-form__description_font-weight_semibold catalog-form__description_condensed-other')
+print(f'Всего спарсилось {len(names)} названий телефонов')
+for name in names:
+    print(name.text)
