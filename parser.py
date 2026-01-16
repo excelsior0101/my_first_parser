@@ -12,7 +12,7 @@ def fetch_onliner_catalog(url, params=None):
         soup = BeautifulSoup(response.text, 'html.parser')
         return soup
     except requests.exceptions.RequestException as exc:
-        print(f'Ошибка при запросе к API: {exc}')
+        print(f'Ошибка: {exc}')
         return None
     
 
